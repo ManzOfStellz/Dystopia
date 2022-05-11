@@ -6,6 +6,7 @@ Made in Python 3
 Made on repl, runs best on repl.
 
 Please do not alter the datastore file in any way before use, doing *may* lead to issues later on in the game
+
 Multiple endings
 
 How to run:
