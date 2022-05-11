@@ -1,0 +1,12 @@
+<inventory>
+	<keyinfo>
+		<name />
+		<roomnumber>0</roomnumber>
+		<shirt />
+        <health>100</health>
+	</keyinfo>
+    <items>
+        <carkey />
+        <weapon />
+    </items>
+</inventory>
