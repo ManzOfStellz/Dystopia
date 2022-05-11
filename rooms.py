@@ -217,7 +217,7 @@ def ending(message): #Ending function, allows me to save many lines of code and 
     logoprint(logo)
     time.sleep(1)
     slowprint(message)
-    slowprint("Made by Keshuv Vishram. (@ManzOfStellz github)")
+    slowprint("Made by Keshuv Vishram. (@ManzOfStellz)")
     time.sleep(2)
     databasefunctions.formatsave()
     exit()
