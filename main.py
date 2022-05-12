@@ -30,8 +30,8 @@ os.system('clear')
 rooms.checkforsave(
 )  #Checks for save and prompts if they wish to continue if save is found
 #Main code execution
-#try:  # Error catching
-while (True):
+try:  # Error catching
+  while (True):
         x = databasefunctions.getfield('roomnumber')
         if x == "0":
             rooms.startingroom()
@@ -53,7 +53,7 @@ while (True):
             rooms.room8()
         if x == "9":
             rooms.room9()
-#except Exception:
-#    rooms.slowprint(str(Exception))  # Error catching
+except Exception:
+rooms.slowprint(str(Exception))  #Error catching
 #MadeByKeshuvVishram
-#MadeByKeshuvVishram
+
