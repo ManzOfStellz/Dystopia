@@ -54,6 +54,6 @@ try:  # Error catching
         if x == "9":
             rooms.room9()
 except Exception:
-rooms.slowprint(str(Exception))  #Error catching
+	rooms.slowprint(str(Exception))  #Error catching
 #MadeByKeshuvVishram
 

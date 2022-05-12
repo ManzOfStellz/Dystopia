@@ -53,7 +53,6 @@ def checkfightroom(roomNum): #Used for checking if a fight should occur
     if fightroom == roomNum:
         return True
 
-
 def logoprint(t): #prints each character individually with an extremely low timeout for aesthetic effect
     for l in t + '\n':
         sys.stdout.write(l)
