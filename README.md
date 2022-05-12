@@ -3,7 +3,7 @@ Neat little game I made in my free time
 
 Made in Python 3
 
-Made on repl, runs best on repl.
+Made in repl, runs best in repl.
 
 Please do not alter the datastore file in any way before use, doing *may* lead to issues later on in the game
 
