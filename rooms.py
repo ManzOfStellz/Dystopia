@@ -13,12 +13,12 @@ logo = """████████▄  ▄██   ▄      ▄█████�
 ███    ███ ███   ███          ███     ███     ███    ███   ███        ███    ███    ███ 
 ███   ▄███ ███   ███    ▄█    ███     ███     ███    ███   ███        ███    ███    ███ 
 ████████▀   ▀█████▀   ▄████████▀     ▄████▀    ▀██████▀   ▄████▀      █▀     ███    █▀  
-                                                                                        """ 
+                                                                                        """
 #Defining logo (ascii art)
 
-fightroom = 0 #sets a base value for fightroom
+fightroom = 0  #sets a base value for fightroom
 #grabs basic variables from database so it can be referred to in any function without global
-shirt = databasefunctions.getfield('shirt') 
+shirt = databasefunctions.getfield('shirt')
 weapon = databasefunctions.getfield('weapon')
 name = databasefunctions.getfield('name')
 #List of enemies that can appear in the fightroom
@@ -43,31 +43,39 @@ damagelist = [
 ]
 
 
-def randomisefightroom(): #Randomises fight room, throughout this program the fightroom changes position
+def randomisefightroom(
+):  #Randomises fight room, throughout this program the fightroom changes position
     global fightroom
     fightroom = random.randint(1, 9)
     return fightroom
 
 
-def checkfightroom(roomNum): #Used for checking if a fight should occur
+def checkfightroom(roomNum):  #Used for checking if a fight should occur
     if fightroom == roomNum:
         return True
 
-def logoprint(t): #prints each character individually with an extremely low timeout for aesthetic effect
+
+def logoprint(
+    t
+):  #prints each character individually with an extremely low timeout for aesthetic effect
     for l in t + '\n':
         sys.stdout.write(l)
         sys.stdout.flush()
         time.sleep(0.001)
 
 
-def slowprint(s): #prints each character individually with a medium timeout for aesthetic effect
+def slowprint(
+    s
+):  #prints each character individually with a medium timeout for aesthetic effect
     for c in s + '\n':
         sys.stdout.write(c)
         sys.stdout.flush()
         time.sleep(0.06)
 
 
-def checkinput(userinput, field1, field2): #Checks the input user gave against predefined values, ensures program doesn't produce unpreventable errors
+def checkinput(
+    userinput, field1, field2
+):  #Checks the input user gave against predefined values, ensures program doesn't produce unpreventable errors
     while userinput.lower() != field1 and userinput.lower() != field2:
         slowprint("Please try that again , choose between " + field1 + " or " +
                   field2 + ".")
@@ -75,21 +83,25 @@ def checkinput(userinput, field1, field2): #Checks the input user gave against p
     return userinput.lower()
 
 
-def fight(): #Fight function
-    opponent = peoplename[random.randint(0, 8)] #Grabs name to use
-    opponenthealth = 100 #Sets opponent's health to 0
+def fight():  #Fight function
+    opponent = peoplename[random.randint(0, 8)]  #Grabs name to use
+    opponenthealth = 100  #Sets opponent's health to 0
     slowprint("You are presented with an enemy who introduces themselves as " +
-              opponent + ", now you must fight them, FIGHT!!!!") #User prompt
-    while int(databasefunctions.getfield("health")) > 0 and opponenthealth > 0: #Battle only ends when one of the user or opponent's health drops below or to 0
+              opponent + ", now you must fight them, FIGHT!!!!")  #User prompt
+    while int(
+            databasefunctions.getfield("health")
+    ) > 0 and opponenthealth > 0:  #Battle only ends when one of the user or opponent's health drops below or to 0
         time.sleep(1)
         os.system('clear')
         temphealth = databasefunctions.getfield("health")
         slowprint("You have " + str(temphealth) + " health, " + opponent +
-                  " has " + str(opponenthealth) + " health") #Gives health info to user
-        slowprint("You must attack or block, what do you choose?") #Asks user if they wish to attack or block
+                  " has " + str(opponenthealth) +
+                  " health")  #Gives health info to user
+        slowprint("You must attack or block, what do you choose?"
+                  )  #Asks user if they wish to attack or block
         choice = input(" ")
         choice = checkinput(choice, "attack", "block")
-#       Gets weapon and alters damage dealt depending on weapon
+        #       Gets weapon and alters damage dealt depending on weapon
         if choice == "attack":
             if databasefunctions.getfield("weapon") == "handgun":
                 opponenthealth = opponenthealth - 40
@@ -105,7 +117,8 @@ def fight(): #Fight function
                           ", damaging a fifth of their max health")
             time.sleep(1)
             os.system('clear')
-            block = damagelist[random.randint(0, 13)] #Grabbing damage value in event of opting for block
+            block = damagelist[random.randint(
+                0, 13)]  #Grabbing damage value in event of opting for block
             damagereceived = str(block)
             databasefunctions.updateintfield("health", block)
             slowprint(opponent + " punches you, dealing " +
@@ -122,7 +135,9 @@ def fight(): #Fight function
             databasefunctions.updateintfield("health", damage)
             time.sleep(2)
             os.system('clear')
-					#If your health drops to 0, game ending is forced
+
+
+#If your health drops to 0, game ending is forced
     if int(databasefunctions.getfield("health")) <= 0:
         slowprint(
             opponent +
@@ -138,7 +153,8 @@ def fight(): #Fight function
         exit()
 
 
-def incrementhealth(): #Regains some health in each room so dealing with two fights is actually possible
+def incrementhealth(
+):  #Regains some health in each room so dealing with two fights is actually possible
     if int(databasefunctions.getfield(
             "health")) < 120 and databasefunctions.getfield("shirt") == "r":
         databasefunctions.updateintfield("health", 24)
@@ -151,9 +167,22 @@ def incrementhealth(): #Regains some health in each room so dealing with two fig
             databasefunctions.overwriteintfield("health", 100)
 
 
-def startingroom(): #Initial room, asks for name, shirt.
+def startingroom():  #Initial room, asks for name, shirt.
     global name
     randomisefightroom()
+    slowprint(
+        "Before we begin, do you want to hear some more about Dystopia and how you got here? (y/n): "
+    )
+    loreorno = input("")
+    checkinput(loreorno, "y", "n")
+    if loreorno == "y":
+        slowprint(
+            "You were driving home from work one day, when something attacks you through the windscreen, it looked to be something resembling the human depiction of the grim reaper, but, that's all you can remember. Anyways, you blacked out and are now stuck in this foreign land called Dystopia, you are filled with a variety of different thoughts and emotions but the will to survive is the most prominent. Now you must choose whether to abandon your old life and ride out the rest of your days in this strange land, or to make an attempt at escaping in hopes you can return to your wife and kids... The choice is yours."
+        )
+        time.sleep(1)
+        slowprint("Welcome to Dystopia.")
+    time.sleep(5)
+    os.system('clear')
     slowprint("Our story begins with you...")
     time.sleep(1)
     os.system('clear')
@@ -193,7 +222,8 @@ def startingroom(): #Initial room, asks for name, shirt.
     databasefunctions.overwriteintfield("roomnumber", 1)
 
 
-def checkforsave(): #Checks for save by grabbing room number and comparing it wth the default of 0 or empty and asks user if they wish to continue in the event of a save being found
+def checkforsave(
+):  #Checks for save by grabbing room number and comparing it wth the default of 0 or empty and asks user if they wish to continue in the event of a save being found
     if databasefunctions.getfield(
             "roomnumber") == "0" or databasefunctions.getfield(
                 "roomnumber") == "":
@@ -211,7 +241,9 @@ def checkforsave(): #Checks for save by grabbing room number and comparing it wt
             databasefunctions.formatsave()
 
 
-def ending(message): #Ending function, allows me to save many lines of code and just specify the message
+def ending(
+    message
+):  #Ending function, allows me to save many lines of code and just specify the message
     os.system('clear')
     logoprint(logo)
     time.sleep(1)
@@ -222,7 +254,7 @@ def ending(message): #Ending function, allows me to save many lines of code and 
     exit()
 
 
-def room1(): #First room
+def room1():  #First room
     databasefunctions.overwriteintfield("roomnumber", 1)
     slowprint(
         "You see a path, crawl over and attempt to follow it... eventually, you come across a fork in the path. "
@@ -235,7 +267,7 @@ def room1(): #First room
     time.sleep(1)
     os.system('clear')
     name = databasefunctions.getfield('name')
-    slowprint("where should we go " + name + ", the grate or the path? ")
+    slowprint("Where should we go " + name + ", the grate or the path? ")
     roomshould = input("")
     roomshould = checkinput(roomshould, "grate", "path")
     if roomshould.lower() == "grate":
@@ -244,7 +276,7 @@ def room1(): #First room
         databasefunctions.overwriteintfield("roomnumber", 3)
 
 
-def room2(): #Ending set 0 and ??
+def room2():  #Ending set 0 and ??
     if checkfightroom(2) == True:
         fight()
     slowprint(
@@ -290,7 +322,7 @@ def room2(): #Ending set 0 and ??
         ending("Ending ??: King of Dystopia")
 
 
-def room3(): #Third room
+def room3():  #Third room
     if checkfightroom(3) == True:
         fight()
     slowprint(
@@ -310,7 +342,10 @@ def room3(): #Third room
         databasefunctions.updateStringfield("weapon", weapon)
     time.sleep(1)
     os.system('clear')
-    slowprint(name +", you are presented with yet another choice, this time you must decide whether to continue following the path or to head to a distant lake. Which do you choose?")
+    slowprint(
+        name +
+        ", you are presented with yet another choice, this time you must decide whether to continue following the path or to head to a distant lake. Which do you choose?"
+    )
     userchoice = input("")
     userchoice == checkinput(userchoice, "path", "lake")
     randomisefightroom()
@@ -323,7 +358,7 @@ def room3(): #Third room
     os.system('clear')
 
 
-def room4(): # Fourth room
+def room4():  # Fourth room
     incrementhealth
     if checkfightroom(5) == True:
         fight()
@@ -345,7 +380,7 @@ def room4(): # Fourth room
     os.system('clear')
 
 
-def room5(): #Ending 1
+def room5():  #Ending 1
     incrementhealth()
     if checkfightroom(5) == True:
         fight()
@@ -378,7 +413,7 @@ def room5(): #Ending 1
     )
 
 
-def room6(): #Ending 2
+def room6():  #Ending 2
     incrementhealth()
     if checkfightroom(6) == True:
         fight()
@@ -395,7 +430,7 @@ def room6(): #Ending 2
     ending("Ending 2: Yet another wondering soul of Dystopia.")
 
 
-def room7(): #Temple
+def room7():  #Temple
     incrementhealth()
     if checkfightroom(7) == True:
         fight()
@@ -404,7 +439,7 @@ def room7(): #Temple
         "You enter the ruins, and see a staircase. You descend it and come across a fork."
     )
     time.sleep(1)
-    slowprint("Which do you choose "+name+", left or right?")
+    slowprint("Which do you choose " + name + ", left or right?")
     leftorright = input("")
     leftorright = checkinput(leftorright, "left", "right")
     if leftorright.lower() == "left":
@@ -413,7 +448,7 @@ def room7(): #Temple
         databasefunctions.overwriteintfield("roomnumber", 9)
 
 
-def room8(): #Ending set 3 and 4
+def room8():  #Ending set 3 and 4
     incrementhealth()
     if checkfightroom(8) == True:
         fight()
@@ -430,20 +465,58 @@ def room8(): #Ending set 3 and 4
     time.sleep(3)
     os.system('clear')
     slowprint(
-        "They seem to be in a rush, you follow them and are led to a plane, they tell you to get on they can all can escape this place."
+        "She opens her mouth to speak, but before she can even begin a lone survivor shoots a shotgun at another poor lads head, blowing it off completely. Immediately, almost militarily, as if they are used to this, 5 or 6 members of the group raise guns to the perpetrators heads, and one by one proceed to ensure nothing remains of it. However, moments before his death, the murderer throws his shotgun at a weak-looking rock in the wall, and to his luck, it causes the wall to cave in."
+    )
+    time.sleep(4)
+    os.system('clear')
+    slowprint(
+        "One by one, the limestone-covered bricks begin crumbling, and almost out of pure instinct Bea shouts for the entire group to follow a path descending into what looks to be a catacomb."
+    )
+    time.sleep(2)
+    os.system('clear')
+    slowprint(
+        "Bea tells you that the group will link up with another group of survivors, who have been searching for a way to get out of this place"
+    )
+    slowprint(
+        "As you dash through the catacombs, a rock falls from above onto your left leg, crushing it..."
+    )
+    time.sleep(1)
+    os.system('clear')
+    if int(databasefunctions.getfield("health")) <= 40:
+        slowprint(
+            "You are too tired from the previous fight, so you sit there and watch the survivors along with Bea (she got mad back tho) leave you behind..."
+        )
+        time.sleep(3)
+        os.system('clear')
+        ending("Forced ending: Crushed by a rock :(")
+    slowprint(
+        "You manage to get back on your feet, but Bea notices you struggling to run and picks you up."
     )
     time.sleep(1)
     os.system('clear')
     slowprint(
-        "It appears, by some stroke of good luck, that you have survived Dystopia..."
+        "You black out for an unknown amount of time, and wake up with a bandage on your foot, but in agony."
     )
-    time.sleep(2)
+    time.sleep(1)
+    os.system('clear')
+    slowprint(
+        "You notice there are more people than before, and you are outside of the catacombs."
+    )
+    slowprint(
+        "They seem to be in a rush, Bea helps you follow them and are led to a plane, they tell you to get on they can all can escape this place."
+    )
+    time.sleep(1)
+    os.system('clear')
+    slowprint(
+        "It appears, by some stroke of good luck, that you have survived Dystopia (Alongside Bea https://drive.google.com/file/d/1KHcNn1_6mKFYbesApzNdi7eNaMrqgL4x/view?usp=sharing)..."
+    )
+    time.sleep(5)
     os.system('clear')
     time.sleep(1)
-    ending("Ending 3: Soaring across the skies of Dystopia.")
+    ending("Ending 3: Soaring across the cerulean skies of Dystopia.")
 
 
-def room9(): # Ending 5
+def room9():  # Ending 5
     os.system('clear')
     slowprint(
         "You take the right path and it leads you back outside, infront of you is a car."
@@ -485,5 +558,7 @@ def room9(): # Ending 5
         os.system('clear')
         time.sleep(2)
         ending("Ending 5: Escaped Dystopia!")
+
+
 #MadeByKeshuvVishram
 #MadeByKeshuvVishram

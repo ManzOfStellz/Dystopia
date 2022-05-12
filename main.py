@@ -12,7 +12,7 @@ time.sleep(3)
 
 os.system('clear')
 
-rooms.slowprint("Welcome to dystopia.")
+rooms.slowprint("Welcome to Dystopia.")
 
 time.sleep(2)
 
