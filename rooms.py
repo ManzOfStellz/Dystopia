@@ -466,12 +466,12 @@ def room9(): # Ending 5
         time.sleep(1)
         os.system('clear')
         slowprint(
-            "You notice one green thing 'walk' up to you, it lets out a quiet hissing sound, glowing white, and then exploding, killing you in the process. Your limbs and guts alike are embedded into the walls of the temple, and you become nothing more than another relic of Dystopia."
+            "You notice one green thing 'walk' up to you, it lets out a quiet hissing sound, glowing white, and then exploding. Moments before your inevitable demise, you hear the roaring of what can only be a plane soaring above the temple... Your limbs and guts alike are embedded into the walls of the temple, and you become nothing more than another relic of Dystopia."
         )
         time.sleep(2)
         os.system('clear')
         time.sleep(1)
-        ending("Ending 4: Yet another Decoration of Dystopia.")
+        ending("Ending 4: Merely another Decoration of Dystopia.")
     if databasefunctions.getfield("carkey") == "Yes":
         slowprint(
             "You remember the keys you found earlier, pull them out of your pocket, and notice the model of the car, and keys, matches. You try the unlock button and by some miraculous stroke of luck, the car unlocks."
