@@ -254,7 +254,7 @@ def room2(): #Ending set 0 and ??
     os.system('clear')
     if databasefunctions.getfield("shirt") != "g":
         slowprint(
-            "Suddenly, the light switches off, the room goes silent but you can hear a faint seriese of breaths behind you. "
+            "Suddenly, the light switches off, the room goes silent but you can hear a faint series of breaths behind you. "
         )
         time.sleep(2)
         os.system('clear')
