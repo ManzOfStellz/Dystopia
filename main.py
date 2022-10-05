@@ -35,25 +35,25 @@ try:  # Error catching
         x = databasefunctions.getfield('roomnumber')
         if x == "0":
             rooms.startingroom()
-        if x == "1":
+        elif x == "1":
             rooms.room1()
-        if x == "2":
+        elif x == "2":
             rooms.room2()
-        if x == "3":
+        elif x == "3":
             rooms.room3()
-        if x == "4":
+        elif x == "4":
             rooms.room4()
-        if x == "5":
+        elif x == "5":
             rooms.room5()
-        if x == "6":
+        elif x == "6":
             rooms.room6()
-        if x == "7":
+        elif x == "7":
             rooms.room7()
-        if x == "8":
+        elif x == "8":
             rooms.room8()
-        if x == "9":
+        elif x == "9":
             rooms.room9()
-except Exception:
-	rooms.slowprint(str(Exception))  #Error catching
+except Exception as e:
+	rooms.slowprint("Fatal error has occured! Please restart program. Your progress should have saved. Exception (for debugging): "+str(e)+" Roomnumber (for manual progress rollback): "+databasefunctions.getfield('roomnumber'))  #Error catching
 #MadeByKeshuvVishram
 

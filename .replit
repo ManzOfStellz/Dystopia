@@ -106,4 +106,3 @@ ignoredPackages = ["unit_tests"]
   packageSearch = true
   # Enable guessing what packages are needed from the code.
   guessImports = true
-

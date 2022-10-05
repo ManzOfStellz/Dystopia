@@ -68,14 +68,20 @@ def slowprint(
     s
 ):  #prints each character individually with a medium timeout for aesthetic effect
     for c in s + '\n':
-        sys.stdout.write(c)
+        print(c,end='')
         sys.stdout.flush()
-        time.sleep(0.06)
+        if c == ",":
+         time.sleep(0.5)
+        if c == ".":
+          time.sleep(0.85)
+        if c == ":":
+          time.sleep(1)
+        time.sleep(0.02)
 
 
 def checkinput(
     userinput, field1, field2
-):  #Checks the input user gave against predefined values, ensures program doesn't produce unpreventable errors
+):  #Checks the input u+ser gave against predefined values, ensures program doesn't produce unpreventable errors
     while userinput.lower() != field1 and userinput.lower() != field2:
         slowprint("Please try that again , choose between " + field1 + " or " +
                   field2 + ".")
@@ -181,13 +187,22 @@ def startingroom():  #Initial room, asks for name, shirt.
         )
         time.sleep(1)
         slowprint("Welcome to Dystopia.")
-    time.sleep(5)
+        time.sleep(3)
+    time.sleep(2)
+    os.system('clear')
+    slowprint("If you wish for this text to be printed faster, please stop the program, go to line 73 of rooms.py, and change the value to your desired speed (recommended no less than 0.02)")
+    time.sleep(2)
     os.system('clear')
     slowprint("Our story begins with you...")
     time.sleep(1)
     os.system('clear')
     slowprint("What shall I call you? ")
     name = input("")
+    while len(name) >20 or len(name) <2:
+      os.system('clear')
+      slowprint("Invalid input. Name should be no more than 20 characters and no less than 2")
+      time.sleep(1)
+      name = input("Whats your name?")
     databasefunctions.updateStringfield("name", name)
     name = databasefunctions.getfield('name')
     slowprint("Hello " + name + "!")
@@ -502,8 +517,17 @@ def room8():  #Ending set 3 and 4
     slowprint(
         "You notice there are more people than before, and you are outside of the catacombs."
     )
+    time.sleep(1)
+    os.system('clear')
+    slowprint("A sense of relief rushes over you as you look around and see that all your comrades are alive and well")
+    time.sleep(1)
+    os.system('clear')
+    slowprint("inevitably, this relief is short lived as soon after, the sky turns blood red.")
+    time.sleep(1)
+    os.system('clear')
+    slowprint("A powerful voice echoes throughout the landscape...")
     slowprint(
-        "They seem to be in a rush, Bea helps you follow them and are led to a plane, they tell you to get on they can all can escape this place."
+        "They seem to be in a rush, Bea helps you follow them and are led to a plane, they tell you to get on so they can all can escape this place."
     )
     time.sleep(1)
     os.system('clear')
@@ -560,5 +584,4 @@ def room9():  # Ending 5
         ending("Ending 5: Escaped Dystopia!")
 
 
-#MadeByKeshuvVishram
 #MadeByKeshuvVishram
